@@ -21,7 +21,7 @@ cd ~
 curl -OL https://golang.org/dl/go1.16.7.linux-amd64.tar.gz
 sha256sum go1.16.7.linux-amd64.tar.gz
 sudo tar -C /usr/local -xvf go1.16.7.linux-amd64.tar.gz
-sudo echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
+sudo echo "export PATH=\$PATH:/usr/local/go/bin" >> ~/.profile
 source ~/.profile
 echo "END - configuring go language"
 
@@ -35,6 +35,7 @@ echo "END - install nodejs"
 echo "=> [4]: Installing Gitea"
 git clone https://github.com/go-gitea/gitea.git
 cd gitea
+sudo apt install -y go-bindata
 TAGS="bindata" make build
 TAGS="bindata sqlite sqlite_unlock_notify" make build
 echo "END - install gitea"

@@ -14,6 +14,7 @@ echo "=> [1]: Installing required packages..."
 apt-get install $APT_OPT \
   git \
   curl \
+  make \
   >> $LOG_FILE 2>&1
 
 

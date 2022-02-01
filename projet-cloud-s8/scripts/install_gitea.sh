@@ -9,7 +9,7 @@ LOG_FILE="/vagrant/logs/install_gitea.log"
 DEBIAN_FRONTEND="noninteractive"
 
 echo "=> [1]: Installing required packages..."
-apt-get install $APT_OPT \
+sudo apt-get install $APT_OPT \
   git \
   curl \
   make \

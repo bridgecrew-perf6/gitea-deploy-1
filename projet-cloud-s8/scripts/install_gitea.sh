@@ -31,22 +31,37 @@ source ~/.profile
 echo "END - configuring go language"
 
 
-echo "=> [3]: Installing NodeJS"
+echo "=> [3]: Installing NodeJS ..."
 cd
 curl -fsSL $NODE_URL | sudo -E bash -
 sudo apt-get install -y nodejs >> $LOG_FILE_NODE 2>&1
-echo "END - install nodejs" 
+echo "END - Install NodeJS" 
 
-echo "=> [4]: Installing Gitea"
+echo "=> [4]: Cloning Gitea ..."
 git clone $GITEA_REPO_URL >> $LOG_FILE_GITEA 2>&1
+echo "END - Cloning Gitea Repository"
 cd gitea
-sudo apt install -y go-bindata >> $LOG_FILE_GO 2>&1
+echo "=> [4]: Building Gitea ..."
 TAGS="bindata" make build >> $LOG_FILE_GITEA 2>&1
-echo "END - install gitea"
-echo "=> [5]: Launching Gitea webservice"
+echo "END - Building Gitea"
+
+echo "=> [5]: Launching Gitea service ..."
 cd
-curl -O $GITEA_SERVICE_URL >> $LOG_FILE_GITEA 2>&1
+sudo curl -O $GITEA_SERVICE_URL >> $LOG_FILE_GITEA 2>&1
+sudo sed -i "s/#Wants=mariadb.service/Wants=mariadb.service/g" gitea.service
+sudo sed -i "s/#After=mariadb.service/After=mariadb.service/g" gitea.service
+sudo sed -i "s/User=git/User=vagrant/g" gitea.service
+sudo sed -i "s/Group=git/Group=vagrant/g" gitea.service
+sudo sed -i "s/WorkingDirectory=\/var\/lib\/gitea\//WorkingDirectory=\/home\/vagrant\/gitea\//g" gitea.service
+sudo sed -i "s/usr\/local\/bin\/gitea web/home\/vagrant\/gitea\/gitea web/g" gitea.service
+sudo sed -i "s/etc\/gitea\/app.ini/home\/vagrant\/gitea\/custom\/conf\/app.ini/g" gitea.service
+sudo sed -i "s/USER=git/USER=vagrant/g" gitea.service
+sudo sed -i "s/HOME=\/home\/git/HOME=\/home\/vagrant/g" gitea.service
+sudo sed -i "s/GITEA_WORK_DIR=\/var\/lib\/gitea/GITEA_WORK_DIR=\/home\/vagrant\/gitea/g" gitea.service
 sudo cp gitea.service /etc/systemd/system/ >> $LOG_FILE_GITEA 2>&1
+sudo systemctl enable gitea
+sudo systemctl restart gitea
+echo "END - install gitea"
 
 
 

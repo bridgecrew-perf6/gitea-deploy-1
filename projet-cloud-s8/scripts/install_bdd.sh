@@ -19,12 +19,12 @@ apt-get install $APT_OPT \
 	mariadb-client \
    >> $LOG_FILE 2>&1
 
-#echo "=> [3]: Database remote access configuration"
-#  sudo sed -i "s/.*bind-address.*/bind-address = 192.168.56.81/" /etc/mysql/mariadb.conf.d/50-server.cnf
-#  sudo service mysql restart
-#echo "=> [4]: Configuration de BDD"
-#
-#  mysql < /vagrant/$DBFILE \
-#  >> $LOG_FILE 2>&1
-#
-#echo "END - install MariaDB"
+echo "=> [3]: Database remote access configuration"
+  sudo sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mariadb.conf.d/50-server.cnf
+  sudo service mysql restart
+echo "=> [4]: Configuration de BDD"
+
+  mysql < /vagrant/$DBFILE \
+  >> $LOG_FILE 2>&1
+
+echo "END - install MariaDB"

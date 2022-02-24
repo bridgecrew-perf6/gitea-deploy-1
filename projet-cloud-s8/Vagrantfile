@@ -27,6 +27,6 @@ Vagrant.configure("2") do |config|
     SHELL
     machine.vm.provision "shell", path: "scripts/install_sys.sh"
     machine.vm.provision "shell", path: "scripts/install_bdd.sh"
-    machine.vm.provision "shell", path: "scripts/install_gitea.sh", privileged: false
+    machine.vm.provision "shell", path: "scripts/install_gitea.sh"
   end
 end

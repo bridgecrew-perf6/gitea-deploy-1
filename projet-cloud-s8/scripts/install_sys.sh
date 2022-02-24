@@ -25,7 +25,6 @@ apt-get install $APT_OPT \
   wget \
   gnupg \
   unzip \
-  build-essential \
   >> $LOG_FILE 2>&1
 
 echo "=> [2]: Server configuration"

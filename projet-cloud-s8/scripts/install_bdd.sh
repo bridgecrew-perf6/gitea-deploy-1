@@ -20,11 +20,10 @@ apt-get install $APT_OPT \
    >> $LOG_FILE 2>&1
 echo "END - Install required packages"
 
-echo "=> [2]: Database remote access configuration"
-  sudo sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mariadb.conf.d/50-server.cnf
+echo "=> [2]: Database init and mysql conf"
+  sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mariadb.conf.d/50-server.cnf
   mysql < /vagrant/$DBFILE \
   >> $LOG_FILE 2>&1
   service mysql restart
-echo "END - Change mysql configuration"
 
-echo "END - install MariaDB"
+echo "END - install database"

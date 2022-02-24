@@ -20,12 +20,12 @@ wget -O /usr/local/bin/gitea $GITEA_URL >> $LOG_FILE_GITEA 2>&1
 chmod +x /usr/local/bin/gitea >> $LOG_FILE_GITEA 2>&1
 adduser --system --shell /bin/bash --gecos 'Git Version Control' --group --disabled-password --home /home/git git >> $LOG_FILE_GITEA 2>&1
 mkdir -pv /var/lib/gitea/{custom,data,log} >> $LOG_FILE_GITEA 2>&1
-chown -Rv git:git /var/lib/gitea
-chmod -Rv 750 /var/lib/gitea
-mkdir -v /etc/gitea
-chown -Rv root:git /etc/gitea
-chmod -Rv 770 /etc/gitea
-touch /etc/systemd/system/gitea.service
+chown -Rv git:git /var/lib/gitea >> $LOG_FILE_GITEA 2>&1
+chmod -Rv 750 /var/lib/gitea >> $LOG_FILE_GITEA 2>&1
+mkdir -v /etc/gitea >> $LOG_FILE_GITEA 2>&1
+chown -Rv root:git /etc/gitea >> $LOG_FILE_GITEA 2>&1
+chmod -Rv 770 /etc/gitea >> $LOG_FILE_GITEA 2>&1
+touch /etc/systemd/system/gitea.service >> $LOG_FILE_GITEA 2>&1
 echo "
 [Unit]
 Description=Gitea (Git with a cup of tea)
@@ -49,8 +49,8 @@ AmbientCapabilities=CAP_NET_BIND_SERVICE
 
 [Install]
 WantedBy=multi-user.target" >> /etc/systemd/system/gitea.service
-systemctl start gitea
-systemctl enable gitea
+systemctl start gitea >> $LOG_FILE_GITEA 2>&1
+systemctl enable gitea >> $LOG_FILE_GITEA 2>&1
 
 echo "END - Installing gitea"
 

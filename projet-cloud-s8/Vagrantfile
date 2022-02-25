@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
     machine.vm.hostname = "srv-gitea"
     machine.vm.box = "chavinje/fr-bull-64"
     #machine.vm.box_url = "chavinje/fr-bull-64"
-    machine.vm.network :public_network, bridge: "eno1", ip: "192.168.4.23"
+    machine.vm.network :public_network, bridge: "eno1", ip: "192.168.4.24", use_dhcp_assigned_default_route: true
     # Un repertoire partagé est un plus mais demande beaucoup plus
     # de travail - a voir à la fin
     #machine.vm.synced_folder "./data", "/vagrant_data", SharedFoldersEnableSymlinksCreate: false
@@ -30,3 +30,7 @@ Vagrant.configure("2") do |config|
     machine.vm.provision "shell", path: "scripts/install_gitea.sh"
   end
 end
+
+# prerequisite iptables -F avant lancement
+# pas de regle de filtrage sur la machine hote pouvant bloquer les com
+# del ip route default gateway and change to .50

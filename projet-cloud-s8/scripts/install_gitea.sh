@@ -55,6 +55,10 @@ systemctl enable gitea >> $LOG_FILE_GITEA 2>&1
 echo "END - Installing gitea"
 
 
+# automation of app.ini --> complicated because the file is created @init and not before
+
+
+
 
 
 

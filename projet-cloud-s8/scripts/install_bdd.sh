@@ -1,13 +1,13 @@
 #!/bin/bash
 
-## install server postgres
+## install server mariadb
 
 IP=$(hostname -I | awk '{print $2}')
 APT_OPT="-o Dpkg::Progress-Fancy="0" -q -y"
 LOG_FILE="/vagrant/logs/install_bdd.log"
 DEBIAN_FRONTEND="noninteractive"
 
-#Fichier sql à injecter (présent dans un sous répertoire)
+#SQL file for database
 DBFILE="files/initial_gitea_db.sql"
 
 echo "START - install MariaDB - "$IP

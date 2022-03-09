@@ -1,0 +1,1 @@
+0 3 * * *   git   bash /vagrant/files/backup_gitea.sh

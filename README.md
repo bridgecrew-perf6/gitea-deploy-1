@@ -6,8 +6,8 @@ This project aims at creating a Gitea server, with automated Backup, and scripts
 
 ## Prerequisites
 
-This project uses Vagrant for virtual machine provisioning.
-The default hypervisor used here is VirtualBox.
+This project uses [Vagrant](https://www.vagrantup.com/) for virtual machine provisioning.
+The default hypervisor used here is [VirtualBox](https://www.virtualbox.org/).
 
 You are free to use a different Hypervisor and modify the Vagrantfile accordingly.
 

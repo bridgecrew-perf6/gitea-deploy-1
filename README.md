@@ -41,6 +41,6 @@ The main modification would be to handle all configurations through Ansible.
 Also, I plan on automating most processes that are not yet automated and thus mentionned in the prerequisites.
 
 
-Furthermore, a Zabbix agent is going to be hosted the virtual private server where Gitea is located.
+Furthermore, a Zabbix agent is going to be hosted on the virtual private server where Gitea is located.
 
 Some more security improvements have to be made, such as the database credentials currently being exposed, and the ssh private key sharing method not being optimal as far as I know.

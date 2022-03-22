@@ -18,9 +18,6 @@ echo "=> [1]: Installing required packages..."
 apt-get update $APT_OPT \
   >> $LOG_FILE 2>&1
 
-apt-get upgrade $APT_OPT \
-  >> $LOG_FILE 2>&1
-
 apt-get install $APT_OPT \
   wget \
   gnupg \
@@ -29,9 +26,7 @@ apt-get install $APT_OPT \
 
 echo "=> [2]: Server configuration"
 # Ajout de contrib et non-free pour les depots
-sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list
-# Ajout de la ligne pour le proxy ESEO mais descativé par défaut
-echo "#Acquire::http::Proxy \"http://scully.eseo.fr:9999\";" >> /etc/apt/apt.conf
+sed -i 's/main/main contrib non-free/g' /etc/apt/sources.listu
 # Pour avoir le clavier en français dans la console VB
 # Actif au prochain redémarrage
 # sed -i 's/XKBLAYOUT=\"us\"/XKBLAYOUT=\"fr\"/g' /etc/default/keyboard

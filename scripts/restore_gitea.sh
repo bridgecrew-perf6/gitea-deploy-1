@@ -8,7 +8,7 @@
 REMOTE_SERVER_IP="192.168.4.87"
 # ID is the value of the server backup to be restored
 ID=""
-REMOTE_BACKUP="vagrant@$REMOTE_SERVER_IP:/Data/etudiant/Backup/gitea-$ID.zip"
+REMOTE_BACKUP="etudiant@$REMOTE_SERVER_IP:/Data/etudiant/Backup-gitea/$ID.zip"
 # DB credentials
 USER="git"
 PASS="secret"
@@ -16,15 +16,15 @@ DATABASE="gitea"
 
 if [-f "$REMOTE_BACKUP"]; then
     # Collects the backup from the remote server
-    scp $REMOTE_BACKUP /vagrant/files
+    su git
+    scp -i /home/git/.ssh/giteakey $REMOTE_BACKUP /home/git/backup-gitea/
 
-    unzip gitea-dump-$ID.zip
-    cd gitea-dump-$ID
+    unzip $ID.zip
 
-    mv data/conf/app.ini /etc/gitea/conf/app.ini
+    mv app.ini /etc/gitea/conf/app.ini
     mv data/* /var/lib/gitea/data/
     mv log/* /var/lib/gitea/log/
-    mv repos/* /home/git/
+    mv repos/* /var/lib/gitea/gitea-repositories
 
     chown -R git:git /etc/gitea/conf/app.ini /var/lib/gitea
 

@@ -26,7 +26,7 @@ chmod +x /usr/local/bin/gitea >> $LOG_FILE_GITEA 2>&1
 
 # Creates Git user
 adduser --system --shell /bin/bash --gecos 'Git Version Control' --group --disabled-password --home /home/git git >> $LOG_FILE_GITEA 2>&1
-
+passwd -d git
 mkdir -pv /var/lib/gitea/{custom,data,log} >> $LOG_FILE_GITEA 2>&1
 chown -Rv git:git /var/lib/gitea >> $LOG_FILE_GITEA 2>&1
 chmod -Rv 750 /var/lib/gitea >> $LOG_FILE_GITEA 2>&1
@@ -43,6 +43,8 @@ systemctl enable gitea >> $LOG_FILE_GITEA 2>&1
 echo "END - Installing gitea"
 
 echo "=> [3]: Enabling cron backup"
+su git
+mkdir /home/git/backup-gitea/
 crontab -u git /vagrant/files/cron_backup >> $LOG_FILE_GITEA 2>&1
 echo "END - Backup enabled"
 

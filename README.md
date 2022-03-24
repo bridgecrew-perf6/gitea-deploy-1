@@ -28,7 +28,8 @@ it can happen that we need to run the following command:
 iptables -F
 which flushes iptables.
 
-The file/cron_backup file contains the cron configuration for the backup script to be called. You can change it if you want as well.
+
+Refer to the [wiki](https://github.com/vyannis/gitea-deploy/wiki) for more informations.
 
 
 

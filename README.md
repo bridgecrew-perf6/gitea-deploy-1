@@ -25,7 +25,7 @@ By default, the default gateway is configured to the NAT interface in the Vagran
 You can change the IPs in the Vagrantfile if needed.
 On the same topic, we, at our lab have issues with iptables;
 it can happen that we need to run the following command:
-iptables -F
+`iptables -F`
 which flushes iptables.
 
 

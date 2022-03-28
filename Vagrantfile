@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "srv-gitea" do |machine|
     machine.vm.hostname = "srv-gitea"
     machine.vm.box = "chavinje/fr-bull-64"
-    machine.vm.network :public_network, bridge: "eno1", ip: "192.168.4.24", use_dhcp_assigned_default_route: true
+    machine.vm.network :public_network, bridge: "eno1", ip: "192.168.0.41", use_dhcp_assigned_default_route: true
     config.vm.provision "shell",
       run: "always",
       inline: "ip route del default via 10.0.2.2 || true"

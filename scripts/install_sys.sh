@@ -26,7 +26,7 @@ apt-get install $APT_OPT \
 
 echo "=> [2]: Server configuration"
 # Ajout de contrib et non-free pour les depots
-sed -i 's/main/main contrib non-free/g' /etc/apt/sources.listu
+sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list
 # Pour avoir le clavier en français dans la console VB
 # Actif au prochain redémarrage
 # sed -i 's/XKBLAYOUT=\"us\"/XKBLAYOUT=\"fr\"/g' /etc/default/keyboard

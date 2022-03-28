@@ -13,11 +13,10 @@ DBFILE="files/initial_gitea_db.sql"
 echo "START - install MariaDB - "$IP
 
 echo "=> [1]: Install required packages ..."
-DEBIAN_FRONTEND=noninteractive
 apt-get install $APT_OPT \
 	mariadb-server \
 	mariadb-client \
-   >> $LOG_FILE 2>&1
+  >> $LOG_FILE 2>&1
 echo "END - Installed required packages"
 
 echo "=> [2]: Database init and mysql conf"

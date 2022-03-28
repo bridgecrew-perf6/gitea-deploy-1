@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
       inline: "ip route del default via 10.0.2.2 || true"
     config.vm.provision "shell",
       run: "always",
-      inline: "ip route add default via 192.168.4.50"
+      inline: "ip route add default via 192.168.0.46"
     machine.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--name", "srv-gitea"]
       v.customize ["modifyvm", :id, "--groups", "/S8-cloud"]

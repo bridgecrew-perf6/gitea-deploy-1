@@ -5,7 +5,7 @@
 # https://docs.gitea.io/en-us/backup-and-restore/
 
 # Backup location
-REMOTE_SERVER_IP="192.168.4.87"
+REMOTE_SERVER_IP="192.168.0.42"
 # ID is the value of the server backup to be restored
 ID=""
 REMOTE_BACKUP="etudiant@$REMOTE_SERVER_IP:/Data/etudiant/Backup-gitea/$ID.zip"

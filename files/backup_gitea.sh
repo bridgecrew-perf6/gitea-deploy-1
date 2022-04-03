@@ -6,12 +6,14 @@
 
 REMOTE_SERVER_LOCATION="etudiant@192.168.0.42:/Data/etudiant/Backup-gitea/"
 LOG_FILE_BACKUP="/home/git/logs/backup.log"
+SSH_CRED="/home/git/.ssh/giteakey"
+DATE="`date +"%H%M%d%m%Y"`"
 
 # Switch to git user
 su git
 cd
-gitea dump -w /home/git/dump/  -c /etc/gitea/app.ini -f /home/git/backup-gitea/"`date +"%H%M%d%m%Y"`".zip >> $LOG_FILE_BACKUP 2>&1
+gitea dump -w /home/git/dump/  -c /etc/gitea/app.ini -f /home/git/backup-gitea/$DATE.zip >> $LOG_FILE_BACKUP 2>&1
 
 # Sends the backed up zip to remote server
-scp -o "StrictHostKeyChecking=no" -i /home/git/.ssh/giteakey gitea-dump-*.zip $REMOTE_SERVER_LOCATION
+scp -o "StrictHostKeyChecking=no" -i $SSH_CRED $DATE.zip $REMOTE_SERVER_LOCATION
 

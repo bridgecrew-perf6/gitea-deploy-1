@@ -8,7 +8,7 @@ LOG_FILE="/vagrant/logs/install_bdd.log"
 DEBIAN_FRONTEND="noninteractive"
 
 #SQL file for database
-DBFILE="files/initial_gitea_db.sql"
+DBFILE="data/initial_gitea_db.sql"
 
 echo "START - install MariaDB - "$IP
 

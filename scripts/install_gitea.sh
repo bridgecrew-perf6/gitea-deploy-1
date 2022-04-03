@@ -9,7 +9,8 @@ LOG_FILE_GITEA="/vagrant/logs/install_gitea.log"
 LOG_FILE="/vagrant/logs/install_dependencies.log"
 GITEA_URL="https://dl.gitea.io/gitea/1.16.1/gitea-1.16.1-linux-amd64"
 DEBIAN_FRONTEND="noninteractive"
-GITEA_SERVICE="files/gitea.service"
+GITEA_SERVICE="data/gitea.service"
+APP_INI="data/default_ini"
 
 echo "=> [1]: Installing required packages..."
 sudo apt-get install $APT_OPT \
@@ -38,18 +39,17 @@ chmod -Rv 770 /etc/gitea >> $LOG_FILE_GITEA 2>&1
 
 # Adds Gitea service file and starting the service
 cp /vagrant/$GITEA_SERVICE /etc/systemd/system/ >> $LOG_FILE_GITEA 2>&1
+mv -f /vagrant/$APP_INI /etc/gitea/app.ini >> $LOG_FILE_GITEA 2>&1
 systemctl start gitea >> $LOG_FILE_GITEA 2>&1
 systemctl enable gitea >> $LOG_FILE_GITEA 2>&1
 echo "END - Installing gitea"
 
 echo "=> [3]: Enabling cron backup"
-su git
-mkdir /home/git/backup-gitea/
 crontab -u git /vagrant/files/cron_backup >> $LOG_FILE_GITEA 2>&1
+mkdir /home/git/backup-gitea/ /home/git/dump/ /home/git/logs/ >> $LOG_FILE_GITEA 2>&1
+chown -R git:git /home/git/backup-gitea/ /home/git/dump/ /home/git/logs/ >> $LOG_FILE_GITEA 2>&1
+
 echo "END - Backup enabled"
-
-# automation of app.ini --> complicated because the file is created @init and not before
-
 
 
 

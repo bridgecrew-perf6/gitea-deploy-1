@@ -1,1 +1,1 @@
-0 3 * * *   git   bash /vagrant/scripts/backup_gitea.sh
+0 3 * * *   git   bash /vagrant/files/backup_gitea.sh

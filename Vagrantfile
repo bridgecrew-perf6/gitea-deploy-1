@@ -2,14 +2,12 @@
 # vi: set ft=ruby :
 
 
-# prerequisite "iptables -F" avant lancement
-# pas de regle de filtrage sur la machine hote pouvant bloquer les com
-# (del ip route default gateway and change to .50)
+# prerequisite "iptables -F" avant lancement du script
 
 Vagrant.configure("2") do |config|
   config.vm.define "srv-gitea" do |machine|
     machine.vm.hostname = "srv-gitea"
-    machine.vm.box = "chavinje/fr-bull-64"
+    machine.vm.box = "debian/stretch64"
     machine.vm.network :public_network, bridge: "eno1", ip: "192.168.0.41", use_dhcp_assigned_default_route: true
     config.vm.provision "shell",
       run: "always",

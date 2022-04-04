@@ -36,12 +36,11 @@ if ssh -q -o "StrictHostKeyChecking=no" -i $SSH_CRED $REMOTE_SERVER test -e $BAC
     mv -f data/* /var/lib/gitea/data/
     mv -f log/* /var/lib/gitea/log/
     mv -f repos/* /var/lib/gitea/gitea-repositories/
-    mysql --default-character-set=utf8mb4 -u$USER -p$PASS $DATABASE <gitea-db.sql
     
     echo "END - Backup restored"
 fi
 '
-mysql --default-character-set=utf8mb4 -uroot -p$PASS $DATABASE < /vagrant/data/db_reset.sql
-mysql --default-character-set=utf8mb4 -u$USER -p$PASS $DATABASE < gitea-db.sql
+sudo mysql --default-character-set=utf8mb4 -uroot $DATABASE < /vagrant/data/db_reset.sql
+sudo mysql --default-character-set=utf8mb4 -u$USER -p$PASS $DATABASE < gitea-db.sql
 chown -R git:git /etc/gitea/app.ini /var/lib/gitea
 service gitea restart

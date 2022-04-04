@@ -11,6 +11,7 @@ GITEA_URL="https://dl.gitea.io/gitea/1.16.1/gitea-1.16.1-linux-amd64"
 DEBIAN_FRONTEND="noninteractive"
 GITEA_SERVICE="data/gitea.service"
 APP_INI="data/default_ini"
+GITEA_SSH="data/giteakey"
 
 echo "=> [1]: Installing required packages..."
 sudo apt-get install $APT_OPT \
@@ -28,6 +29,11 @@ chmod +x /usr/local/bin/gitea >> $LOG_FILE_GITEA 2>&1
 # Creates Git user
 adduser --system --shell /bin/bash --gecos 'Git Version Control' --group --disabled-password --home /home/git git >> $LOG_FILE_GITEA 2>&1
 passwd -d git
+mkdir -p /home/git/.ssh && chmod 700 /home/git/.ssh && chown git:git /home/git/.ssh >> $LOG_FILE_GITEA 2>&1
+if [ ! -f $GITEA_SSH ]; then
+  sh files/gitea_ssh.sh
+fi
+cp $GITEA_SSH /home/git/.ssh/ >> $LOG_FILE_GITEA 2>&1
 mkdir -pv /var/lib/gitea/{custom,data,log} >> $LOG_FILE_GITEA 2>&1
 chown -Rv git:git /var/lib/gitea >> $LOG_FILE_GITEA 2>&1
 chmod -Rv 750 /var/lib/gitea >> $LOG_FILE_GITEA 2>&1

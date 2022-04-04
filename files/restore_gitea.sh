@@ -16,6 +16,8 @@ USER="git"
 PASS="secret"
 DATABASE="gitea"
 
+sudo rm -rf /etc/gitea/app.ini /var/lib/gitea/data/* /var/lib/gitea/log/* /var/lib/gitea/gitea-repositories/*
+
 sudo -H -u git bash -c '
 
 if ssh -q -o "StrictHostKeyChecking=no" -i $SSH_CRED $REMOTE_SERVER test -e $BACKUP; then
@@ -30,7 +32,7 @@ if ssh -q -o "StrictHostKeyChecking=no" -i $SSH_CRED $REMOTE_SERVER test -e $BAC
     mv -f app.ini /etc/gitea/app.ini
     mv -f data/* /var/lib/gitea/data/
     mv -f log/* /var/lib/gitea/log/
-    mv -f repos/* /var/lib/gitea/gitea-repositories
+    mv -f repos/* /var/lib/gitea/gitea-repositories/
     mysql --default-character-set=utf8mb4 -u$USER -p$PASS $DATABASE <gitea-db.sql
     chown -R git:git /etc/gitea/app.ini /var/lib/gitea 
     

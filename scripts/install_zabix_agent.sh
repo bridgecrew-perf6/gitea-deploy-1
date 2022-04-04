@@ -1,7 +1,7 @@
 #!/bin/bash
 
 LOG_FILE= "/vagrant/logs/install_zabbix_agent.log"
-DEBIAN_VERSION="debian11"
+DEBIAN_VERSION="debian9"
 DEBIAN_FRONTEND="noninteractive"
 wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_6.0-1+${DEBIAN_VERSION}_all.deb >> $LOG_FILE 2>&1
 apt-get update >> $LOG_FILE 2>&1

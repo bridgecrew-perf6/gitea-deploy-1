@@ -30,8 +30,8 @@ chmod +x /usr/local/bin/gitea >> $LOG_FILE_GITEA 2>&1
 adduser --system --shell /bin/bash --gecos 'Git Version Control' --group --disabled-password --home /home/git git >> $LOG_FILE_GITEA 2>&1
 passwd -d git
 mkdir -p /home/git/.ssh && chmod 700 /home/git/.ssh && chown git:git /home/git/.ssh >> $LOG_FILE_GITEA 2>&1
-if [ ! -f $GITEA_SSH ]; then
-  sh files/gitea_ssh.sh
+if [ ! -f /vagrant/$GITEA_SSH ]; then
+  sh /vagrant/files/gitea_ssh.sh >> $LOG_FILE_GITEA 2>&1
 fi
 cp $GITEA_SSH /home/git/.ssh/ && chmod 600 /home/git/.ssh/giteakey && chown git:git /home/git/.ssh/giteakey >> $LOG_FILE_GITEA 2>&1
 mkdir -pv /var/lib/gitea/{custom,data,log} >> $LOG_FILE_GITEA 2>&1

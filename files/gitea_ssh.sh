@@ -9,9 +9,9 @@ DEBIAN_FRONTEND="noninteractive"
 
 echo "START - Generating ssh keypair for git user "
 
-su git
+sudo -H -u git bash -c '
 ssh-keygen -f /home/git/.ssh/giteakey -t rsa -N '' >> $LOG_FILE 2>&1   # generates ssh keypair for git user
-su root
+'
 cp /home/git/.ssh/giteakey /vagrant/data/ >> $LOG_FILE 2>&1
 
 echo "END - Shared git's ssh key "

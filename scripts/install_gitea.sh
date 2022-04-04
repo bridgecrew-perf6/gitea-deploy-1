@@ -14,7 +14,7 @@ APP_INI="data/default_ini"
 GITEA_SSH="data/giteakey"
 
 echo "=> [1]: Installing required packages..."
-sudo apt-get install $APT_OPT \
+apt-get install $APT_OPT \
   git \
   zip \
   >> $LOG_FILE 2>&1

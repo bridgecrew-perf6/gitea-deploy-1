@@ -16,12 +16,14 @@ USER="git"
 PASS="secret"
 DATABASE="gitea"
 
-if ssh -i $SSH_CRED $REMOTE_SERVER test -e $BACKUP; then
+sudo -H -u git bash -c '
+
+if ssh -q -o "StrictHostKeyChecking=no" -i $SSH_CRED $REMOTE_SERVER test -e $BACKUP; then
     # Collects the backup from the remote server
     echo "=> [1]: Collecting backup from remote server..."
-    su git
+    rm -rf /home/git/backup-recovery
     mkdir /home/git/backup-recovery && cd /home/git/backup-recovery
-    scp -o "StrictHostKeyChecking=no" -i $SSH_CRED $REMOTE_BACKUP /home/git/backup-recovery/
+    scp -q -i $SSH_CRED $REMOTE_BACKUP /home/git/backup-recovery/
     echo "END - Collecting backup from remote server..."
     unzip $ID.zip
     echo "=> [2]: Restoring backup..."
@@ -29,12 +31,11 @@ if ssh -i $SSH_CRED $REMOTE_SERVER test -e $BACKUP; then
     mv -f data/* /var/lib/gitea/data/
     mv -f log/* /var/lib/gitea/log/
     mv -f repos/* /var/lib/gitea/gitea-repositories
-
-    su root
-    chown -R git:git /etc/gitea/app.ini /var/lib/gitea 
-
     mysql --default-character-set=utf8mb4 -u$USER -p$PASS $DATABASE <gitea-db.sql
-
-    service gitea restart
+    chown -R git:git /etc/gitea/app.ini /var/lib/gitea 
+    
+    
     echo "END - Backup restored"
 fi
+'
+service gitea restart

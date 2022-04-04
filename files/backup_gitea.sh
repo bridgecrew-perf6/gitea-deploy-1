@@ -10,10 +10,11 @@ SSH_CRED="/home/git/.ssh/giteakey"
 DATE="`date +"%H%M%d%m%Y"`"
 
 # Switch to git user
-su git
-cd
+sudo -H -u git bash -c '
+cd /home/git/
 gitea dump -w /home/git/dump/  -c /etc/gitea/app.ini -f /home/git/backup-gitea/$DATE.zip >> $LOG_FILE_BACKUP 2>&1
 
 # Sends the backed up zip to remote server
-scp -o "StrictHostKeyChecking=no" -i $SSH_CRED $DATE.zip $REMOTE_SERVER_LOCATION
+scp -q -o "StrictHostKeyChecking=no" -i $SSH_CRED /home/git/backup-gitea/$DATE.zip $REMOTE_SERVER_LOCATION
 
+'

@@ -33,5 +33,6 @@ Vagrant.configure("2") do |config|
     machine.vm.provision "shell", path: "scripts/install_sys.sh"
     machine.vm.provision "shell", path: "scripts/install_bdd.sh"
     machine.vm.provision "shell", path: "scripts/install_gitea.sh"
+    machine.vm.provision "shell", path: "scripts/install_zabbix_agent.sh"
   end
 end

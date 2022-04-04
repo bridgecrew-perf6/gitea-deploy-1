@@ -40,19 +40,20 @@ chmod -Rv 750 /var/lib/gitea >> $LOG_FILE_GITEA 2>&1
 mkdir -v /etc/gitea >> $LOG_FILE_GITEA 2>&1
 
 # Permissions
+rm /etc/gitea/app.ini >> $LOG_FILE_GITEA 2>&1
+cp /vagrant/$APP_INI /etc/gitea/app.ini >> $LOG_FILE_GITEA 2>&1
 chown -Rv root:git /etc/gitea >> $LOG_FILE_GITEA 2>&1
 chmod -Rv 770 /etc/gitea >> $LOG_FILE_GITEA 2>&1
 
 # Adds Gitea service file and starting the service
 cp /vagrant/$GITEA_SERVICE /etc/systemd/system/ >> $LOG_FILE_GITEA 2>&1
-mv -f /vagrant/$APP_INI /etc/gitea/app.ini >> $LOG_FILE_GITEA 2>&1
 systemctl start gitea >> $LOG_FILE_GITEA 2>&1
 systemctl enable gitea >> $LOG_FILE_GITEA 2>&1
 echo "END - Installing gitea"
 
 echo "=> [3]: Enabling cron backup"
-crontab -u git /vagrant/files/cron_backup >> $LOG_FILE_GITEA 2>&1
-mkdir /home/git/backup-gitea/ /home/git/dump/ /home/git/logs/ >> $LOG_FILE_GITEA 2>&1
+crontab -u vagrant /vagrant/files/cron_backup >> $LOG_FILE_GITEA 2>&1
+mkdir /home/git/backup-gitea /home/git/dump /home/git/logs >> $LOG_FILE_GITEA 2>&1
 chown -R git:git /home/git/backup-gitea/ /home/git/dump/ /home/git/logs/ >> $LOG_FILE_GITEA 2>&1
 
 echo "END - Backup enabled"

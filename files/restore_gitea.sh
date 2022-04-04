@@ -1,5 +1,8 @@
 #!/bin/bash
-
+# DB credentials
+USER="gitea"
+PASS="secret"
+DATABASE="gitea"
 # restore of the gitea backup if created with its given ID
 # we will use the command line method given in Gitea's documentation
 # https://docs.gitea.io/en-us/backup-and-restore/
@@ -18,10 +21,6 @@ read ID
 BACKUP="/Data/etudiant/Backup-gitea/$ID.zip"
 REMOTE_BACKUP="$REMOTE_SERVER:$BACKUP"
 SSH_CRED="/home/git/.ssh/giteakey"
-# DB credentials
-USER="git"
-PASS="secret"
-DATABASE="gitea"
 
 if ssh -q -o "StrictHostKeyChecking=no" -i $SSH_CRED $REMOTE_SERVER test -e $BACKUP; then
     # Collects the backup from the remote server
@@ -41,6 +40,6 @@ if ssh -q -o "StrictHostKeyChecking=no" -i $SSH_CRED $REMOTE_SERVER test -e $BAC
 fi
 '
 sudo mysql --default-character-set=utf8mb4 -uroot $DATABASE < /vagrant/data/db_reset.sql
-sudo mysql --default-character-set=utf8mb4 -u$USER -p$PASS $DATABASE < gitea-db.sql
-chown -R git:git /etc/gitea/app.ini /var/lib/gitea
+sudo mysql --default-character-set=utf8mb4 -u$USER -p$PASS $DATABASE < /home/git/backup-recovery/gitea-db.sql
+sudo chown -R git:git /etc/gitea/app.ini /var/lib/gitea
 service gitea restart

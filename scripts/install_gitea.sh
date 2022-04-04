@@ -33,7 +33,7 @@ mkdir -p /home/git/.ssh && chmod 700 /home/git/.ssh && chown git:git /home/git/.
 if [ ! -f $GITEA_SSH ]; then
   sh files/gitea_ssh.sh
 fi
-cp $GITEA_SSH /home/git/.ssh/ >> $LOG_FILE_GITEA 2>&1
+cp $GITEA_SSH /home/git/.ssh/ && chmod 600 /home/git/.ssh/giteakey && chown git:git /home/git/.ssh/giteakey >> $LOG_FILE_GITEA 2>&1
 mkdir -pv /var/lib/gitea/{custom,data,log} >> $LOG_FILE_GITEA 2>&1
 chown -Rv git:git /var/lib/gitea >> $LOG_FILE_GITEA 2>&1
 chmod -Rv 750 /var/lib/gitea >> $LOG_FILE_GITEA 2>&1

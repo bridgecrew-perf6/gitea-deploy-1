@@ -13,6 +13,8 @@ sudo -H -u git bash -c '
 REMOTE_SERVER="etudiant@192.168.0.42"
 # ID is the value of the server backup to be restored
 ID=""
+echo "Please provide the Backup ID:"
+read ID
 BACKUP="/Data/etudiant/Backup-gitea/$ID.zip"
 REMOTE_BACKUP="$REMOTE_SERVER:$BACKUP"
 SSH_CRED="/home/git/.ssh/giteakey"
@@ -35,10 +37,11 @@ if ssh -q -o "StrictHostKeyChecking=no" -i $SSH_CRED $REMOTE_SERVER test -e $BAC
     mv -f log/* /var/lib/gitea/log/
     mv -f repos/* /var/lib/gitea/gitea-repositories/
     mysql --default-character-set=utf8mb4 -u$USER -p$PASS $DATABASE <gitea-db.sql
-    chown -R git:git /etc/gitea/app.ini /var/lib/gitea
-    
     
     echo "END - Backup restored"
 fi
 '
+mysql --default-character-set=utf8mb4 -uroot -p$PASS $DATABASE < /vagrant/data/db_reset.sql
+mysql --default-character-set=utf8mb4 -u$USER -p$PASS $DATABASE < gitea-db.sql
+chown -R git:git /etc/gitea/app.ini /var/lib/gitea
 service gitea restart

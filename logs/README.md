@@ -1,1 +1,1 @@
-# Un repertoire pour que le resultat des install soit stocké
+# Un repertoire pour que le log des install soit stocké

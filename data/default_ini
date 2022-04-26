@@ -10,7 +10,7 @@ USER     = gitea
 PASSWD   = secret
 SCHEMA   =
 SSL_MODE = disable
-CHARSET  = utf8
+CHARSET  = utf8mb4
 PATH     = /var/lib/gitea/data/gitea.db
 LOG_SQL  = false
 

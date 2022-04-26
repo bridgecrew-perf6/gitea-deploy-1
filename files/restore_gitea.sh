@@ -31,10 +31,11 @@ if ssh -q -o "StrictHostKeyChecking=no" -i $SSH_CRED $REMOTE_SERVER test -e $BAC
     echo "END - Collecting backup from remote server..."
     unzip $ID.zip ;
     echo "=> [2]: Restoring backup..."
+    mkdir /var/lib/gitea/data/gitea-repositories
     mv -f app.ini /etc/gitea/app.ini
     mv -f data/* /var/lib/gitea/data/
     mv -f log/* /var/lib/gitea/log/
-    mv -f repos/* /var/lib/gitea/gitea-repositories/
+    mv -f repos/* /var/lib/gitea/data/gitea-repositories/
     
     echo "END - Backup restored"
 fi

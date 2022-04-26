@@ -13,7 +13,7 @@ sudo rm -rf /etc/gitea/app.ini /var/lib/gitea/data/* /var/lib/gitea/log/* /var/l
 sudo -H -u git bash -c '
 
 # Backup location
-REMOTE_SERVER="etudiant@192.168.0.42"
+REMOTE_SERVER="etudiant@192.168.1.2"
 # ID is the value of the server backup to be restored
 ID=""
 echo "Please provide the Backup ID:"

@@ -8,13 +8,13 @@ Vagrant.configure("2") do |config|
   config.vm.define "srv-gitea" do |machine|
     machine.vm.hostname = "srv-gitea"
     machine.vm.box = "debian/stretch64"
-    machine.vm.network :public_network, bridge: "eno1", ip: "192.168.0.41", use_dhcp_assigned_default_route: true
+    machine.vm.network :public_network, bridge: "eno1", ip: "192.168.1.3", use_dhcp_assigned_default_route: true
     config.vm.provision "shell",
       run: "always",
       inline: "ip route del default via 10.0.2.2 || true"
     config.vm.provision "shell",
       run: "always",
-      inline: "ip route add default via 192.168.0.46"
+      inline: "ip route add default via 192.168.1.1"
     machine.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--name", "srv-gitea"]
       v.customize ["modifyvm", :id, "--groups", "/S8-cloud"]

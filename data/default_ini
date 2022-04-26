@@ -18,8 +18,8 @@ LOG_SQL  = false
 ROOT = /var/lib/gitea/data/gitea-repositories
 
 [server]
-SSH_DOMAIN       = 192.168.0.41
-DOMAIN           = 192.168.0.41
+SSH_DOMAIN       = 192.168.1.3
+DOMAIN           = 192.168.1.3
 HTTP_PORT        = 3000
 ROOT_URL         = http://192.168.4.23:3000/
 DISABLE_SSH      = false

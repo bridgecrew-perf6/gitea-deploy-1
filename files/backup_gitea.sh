@@ -6,7 +6,7 @@
 
 # Switch to git user
 sudo -H -u git bash -c '
-REMOTE_SERVER_LOCATION="etudiant@192.168.0.42:/Data/etudiant/Backup-gitea/"
+REMOTE_SERVER_LOCATION="etudiant@192.168.1.2:/Data/etudiant/Backup-gitea/"
 LOG_FILE_BACKUP="/home/git/logs/backup.log"
 SSH_CRED="/home/git/.ssh/giteakey"
 DATE="`date +"%H%M%d%m%Y"`"

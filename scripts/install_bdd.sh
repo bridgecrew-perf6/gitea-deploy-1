@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## install server mariadb
+## install server mysql db
 
 IP=$(hostname -I | awk '{print $2}')
 APT_OPT="-o Dpkg::Progress-Fancy="0" -q -y"
@@ -10,7 +10,7 @@ DEBIAN_FRONTEND="noninteractive"
 #SQL file for database
 DBFILE="data/initial_gitea_db.sql"
 
-echo "START - install MariaDB - "$IP
+echo "START - install MySQL DB - "$IP
 
 echo "=> [1]: Install required packages ..."
 apt-get install $APT_OPT \

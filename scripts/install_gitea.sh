@@ -19,6 +19,7 @@ apt-get update $APT_OPT \
 apt-get install $APT_OPT \
   git \
   zip \
+  curl \
   >> $LOG_FILE 2>&1
 echo "END - Installed required packages..."
 
@@ -56,7 +57,7 @@ sudo chmod 750 /var/lib/gitea/{data,indexers,log} >> $LOG_FILE_GITEA 2>&1
 sudo chown root:git /etc/gitea >> $LOG_FILE_GITEA 2>&1
 sudo chmod 770 /etc/gitea >> $LOG_FILE_GITEA 2>&1
 
-sudo cp /vagrant/$GITEA_SERVICE /etc/systemd/system/gitea.service >> $LOG_FILE_GITEA 2>&1
+cp /vagrant/$GITEA_SERVICE /etc/systemd/system/gitea.service >> $LOG_FILE_GITEA 2>&1
 
 sudo systemctl daemon-reload
 sudo systemctl enable --now gitea

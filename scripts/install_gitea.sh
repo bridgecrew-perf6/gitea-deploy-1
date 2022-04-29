@@ -57,14 +57,12 @@ sudo chmod 750 /var/lib/gitea/{data,indexers,log} >> $LOG_FILE_GITEA 2>&1
 sudo chown root:git /etc/gitea >> $LOG_FILE_GITEA 2>&1
 sudo chmod 770 /etc/gitea >> $LOG_FILE_GITEA 2>&1
 
-sudo cp /vagrant/$GITEA_SERVICE /etc/systemd/system/gitea.service >> $LOG_FILE_GITEA 2>&1i
+sudo cp /vagrant/$GITEA_SERVICE /etc/systemd/system/gitea.service >> $LOG_FILE_GITEA 2>&1
 sudo cp /vagrant/$APP_INI /etc/gitea/app.ini
 
 sudo chown root:git /etc/gitea
 sudo chmod 770 /etc/gitea
 
-sudo systemctl reload systemd
-sudo systemctl restart gitea
 sudo systemctl daemon-reload
 sudo systemctl enable --now gitea
 

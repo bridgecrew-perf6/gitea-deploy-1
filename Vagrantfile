@@ -9,6 +9,7 @@ Vagrant.configure("2") do |config|
     machine.vm.hostname = "srv-gitea"
     machine.vm.box = "debian/bullseye64"
     machine.vm.network :public_network, bridge: "eno1", ip: "192.168.1.3", use_dhcp_assigned_default_route: true
+    # machine.vm.network :forwarded_port, guest 22, host: 2222
     config.vm.provision "shell",
       run: "always",
       inline: "ip route del default via 10.0.2.2 || true"

@@ -25,6 +25,8 @@ echo "END - Installed required packages..."
 
 echo "=> [2]: Installing gitea..."
 
+# sed -i "s/#Port 22/Port 2222/g" /etc/ssh/sshd_config
+
 # Create Git User
 
 sudo adduser \
@@ -34,7 +36,8 @@ sudo adduser \
    --group \
    --disabled-password \
    --home /home/git \
-   git
+   git \
+   >> $LOG_FILE 2>&1
 
 mkdir -p /home/git/.ssh && chmod 700 /home/git/.ssh && chown git:git /home/git/.ssh >> $LOG_FILE_GITEA 2>&1
 if [ ! -f /vagrant/$GITEA_SSH ]; then
@@ -60,11 +63,11 @@ sudo chmod 770 /etc/gitea >> $LOG_FILE_GITEA 2>&1
 sudo cp /vagrant/$GITEA_SERVICE /etc/systemd/system/gitea.service >> $LOG_FILE_GITEA 2>&1
 sudo cp /vagrant/$APP_INI /etc/gitea/app.ini
 
-sudo chown root:git /etc/gitea
-sudo chmod 770 /etc/gitea
+sudo chown root:git /etc/gitea >> $LOG_FILE_GITEA 2>&1
+sudo chmod 770 /etc/gitea >> $LOG_FILE_GITEA 2>&1
 
-sudo systemctl daemon-reload
-sudo systemctl enable --now gitea
+sudo systemctl daemon-reload >> $LOG_FILE_GITEA 2>&1
+sudo systemctl enable --now gitea >> $LOG_FILE_GITEA 2>&1
 
 echo "END - Installing gitea"
 

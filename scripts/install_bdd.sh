@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## install server mysql db
+## install server MariaDB
 
 IP=$(hostname -I | awk '{print $2}')
 APT_OPT="-o Dpkg::Progress-Fancy="0" -q -y"

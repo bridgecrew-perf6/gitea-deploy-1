@@ -25,7 +25,7 @@ echo "END - Installed required packages..."
 
 echo "=> [2]: Installing gitea..."
 
-sed -i "s/#Port 22/Port 22\nPort 2222/g" /etc/ssh/sshd_config
+sed -i "s/#Port 22/Port 22\nPort 2202/g" /etc/ssh/sshd_config
 
 # Create Git User
 

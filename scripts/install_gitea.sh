@@ -25,7 +25,7 @@ echo "END - Installed required packages..."
 
 echo "=> [2]: Installing gitea..."
 
-# sed -i "s/#Port 22/Port 2222/g" /etc/ssh/sshd_config
+sed -i "s/#Port 22/Port 22\nPort 2222/g" /etc/ssh/sshd_config
 
 # Create Git User
 
@@ -38,6 +38,8 @@ sudo adduser \
    --home /home/git \
    git \
    >> $LOG_FILE 2>&1
+
+passwd -d git
 
 mkdir -p /home/git/.ssh && chmod 700 /home/git/.ssh && chown git:git /home/git/.ssh >> $LOG_FILE_GITEA 2>&1
 if [ ! -f /vagrant/$GITEA_SSH ]; then
